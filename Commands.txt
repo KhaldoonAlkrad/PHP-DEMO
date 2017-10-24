@@ -1,0 +1,10 @@
+dir
+ls
+=======
+cd
+cd directoryNaam
+cd ..
+pwd
+===============
+git init
+git status
