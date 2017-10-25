@@ -1,3 +1,64 @@
-Hello
+<!DOCTYPE html>
+<!--
 
-Hi
+Khaldoon Al Krad
+Rekenen Machine 
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> De Rekenen Machine </title>
+    </head>
+    <body>
+        
+       <?php
+
+$OperatorNaam= $_GET['op'];
+
+$x=$_GET['x'];
+$y=$_GET['y'];
+$total=0;
+
+switch ($OperatorNaam)
+{
+    case "add":
+        $total= $x + $y;
+        echo "<b> $x </b> + <b> $y </b> = <b> $total </b>";
+        break;
+    
+    case "minus":
+        $total= $x - $y;
+        echo "<b> $x </b> - <b> $y </b> = <b> $total </b>";
+        break;
+    
+    case "multiply":
+        $total= $x * $y;
+        echo "<b> $x </b> * <b> $y </b> = <b> $total </b>";
+        break;
+    
+       
+    case "division":
+        $total= $x / $y;
+        echo "<b> $x </b> / <b> $y </b> = <b> $total </b>";
+        break;
+    
+    case "modulus":
+        $total= $x % $y;
+        echo "<b> $x </b> % <b> $y </b> = <b> $total </b>";
+        break;
+    
+    case "expo":
+        $total= $x ** $y;
+        echo "<b> $x </b> ** <b> $y </b> = <b> $total </b>";
+        break;
+    
+    default:
+        echo"Je heeft iets veerkeerd gemaakt";
+        break;
+}
+
+
+
+?>
+    </body>
+</html>
