@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>The Battleship Game</title>
+                <style>
+                    
+                    h1{
+                        background-color: green;
+                        color: white;
+                        text-transform: uppercase;
+                        text-align: center;
+                        font-size: 3em;
+                        font-family:'Helvetica', 'Arial', 'Sans-Serif';
+                        letter-spacing: 14px;
+                        margin-top: 0px;
+                        margin-left: 0px;
+                        }
+                                           
+                    sub{
+                        font-size: 12px;
+                        color: white;
+                        text-transform: capitalize;
+                        letter-spacing: 2px;
+                    }
+
+                    #gameboard {
+                        position:relative;
+                        margin:0 auto 2em auto;
+                        width:500px;
+                        height:500px;
+                    }
+                    #gameboard div {
+                        position:absolute;
+                        box-sizing: border-box;         
+                        border: 1px solid #ddd;
+                        width:50px;
+                        height:50px;
+                    }  
+                    
+                    p{
+                        text-align: center;
+                        color: brown;
+                        font-size: 40px;
+                        margin-top: 1px;
+                        margin-bottom:5px;
+                    }
+                    
+                    
+                </style>
+                
+               
+	</head>
+        <body onload="makingTheBoard()">
+	
+            <h1>Battleship
+                <sub>Start Fighting!</sub>
+            </h1>
+            
+            <p id="win"></p>
+            <div id="gameboard"></div>
+            
+            <script>
+                
+                var counter = 0;
+                var rows = 10;
+                var cols = 10;
+                var squareSize = 50;
+                var square=null;
+                var gameBoardContainer = document.getElementById("gameboard");
+                var gameBoard = [
+                                [1,0,1,0,1,0,1,0,1,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0]
+                                ];
+                 function makingTheBoard()
+                 {
+                        for (i = 0; i < cols; i++) 
+                        {
+                                for (j = 0; j < rows; j++)
+                                {
+                                        //Creating the boxes
+                                        square = document.createElement("div");
+                                        gameBoardContainer.appendChild(square);
+                                        square.id = 's' + j + i;			
+
+                                        //Postions of the boxes
+                                        var topPosition = j * squareSize;
+                                        var leftPosition = i * squareSize;			
+                                        square.style.top = topPosition + 'px';
+                                        square.style.left = leftPosition + 'px';						
+                                }
+                        } 
+                        
+                        gameBoardContainer.addEventListener("click", shooting);
+                     
+                 }
+                
+                function shooting(e) 
+                {    
+                     if (e.target !== e.currentTarget)
+                        {
+                                
+                                //get postion in the array using the id of the element
+                                var row = e.target.id.substring(1,2);
+                                var col = e.target.id.substring(2,3);
+                                
+                                if (gameBoard[row][col] == 0)
+                                {
+                                        e.target.style.background = 'green';
+                                        gameBoard[row][col] = 2;
+                                } 
+                                
+                                else if (gameBoard[row][col] == 1)
+                                {
+                                        e.target.style.background = 'red';
+                                        gameBoard[row][col] = 3;
+                                        counter++;
+                                        
+                                        if (counter == 5)
+                                        {
+                                          document.getElementById("win").innerHTML= "You Win!";
+                                          document.getElementById("gameboard").hidden="none";
+                                        }
+                                } 
+                                
+                                else if (gameBoard[row][col] > 1) 
+                                {
+                                     alert("You are wasting your torpedoes\nDon't click on the same place") ;
+                                }		
+                        }
+                    
+                    e.stopPropagation();
+                }
+                
+                </script>
+	
+	</body>
+</html>
